@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruben Lubasa — Full-Stack Developer & Digital Transformation Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --surface: #111110;
+    --surface2: #1a1a17;
+    --gold: #c8a96e;
+    --gold-light: #e8c98a;
+    --gold-dim: #8a6f3e;
+    --cream: #f0ead8;
+    --cream-dim: #a09880;
+    --white: #fafaf5;
+    --accent: #3d6b4f;
+    --accent-bright: #5a9e72;
+    --red: #c45c3a;
+    --border: rgba(200,169,110,0.15);
+    --border-strong: rgba(200,169,110,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === NOISE OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(200,169,110,0.04) 100%);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(61,107,79,0.15);
+    border: 1px solid rgba(90,158,114,0.3);
+    color: var(--accent-bright);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    width: fit-content;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-name {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 800;
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .hero-name span {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--cream-dim);
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    color: var(--cream-dim);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    border-left: 2px solid var(--gold-dim);
+    padding-left: 20px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    padding: 14px 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--border-strong);
+    color: var(--cream);
+    padding: 14px 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    gap: 20px;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .stat-card:hover::before { transform: scaleX(1); }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--cream-dim);
+    margin-top: 4px;
+  }
+
+  /* === NAV === */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,8,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    gap: 40px;
+  }
+
+  .nav-logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-right: auto;
+  }
+
+  nav a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--gold); }
+
+  /* === SECTIONS === */
+  section {
+    padding: 100px 60px;
+    border-bottom: 1px solid var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  /* === SKILLS GRID === */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-cell {
+    background: var(--bg);
+    padding: 28px 32px;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-cell:hover { background: var(--surface); }
+
+  .skill-cell::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 12px; right: 16px;
+    font-size: 48px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    color: rgba(200,169,110,0.05);
+    line-height: 1;
+  }
+
+  .skill-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .skill-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .tag {
+    background: rgba(200,169,110,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold-dim);
+    font-size: 10px;
+    padding: 3px 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* === EXPERIENCE === */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    margin-bottom: 56px;
+    position: relative;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -36px; top: 6px;
+    width: 10px; height: 10px;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    transform: rotate(45deg);
+  }
+
+  .timeline-period {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .timeline-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .timeline-body {
+    color: var(--cream-dim);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .timeline-body ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .timeline-body li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .timeline-body li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-size: 10px;
+    top: 4px;
+  }
+
+  /* === SERVICES === */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .service-card {
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    background: var(--surface);
+    position: relative;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+  }
+
+  .service-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    color: var(--cream-dim);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  /* === LANGUAGES === */
+  .lang-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .lang-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    padding: 14px 24px;
+    background: var(--surface);
+  }
+
+  .lang-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .lang-level {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gold-dim);
+  }
+
+  /* === EDUCATION === */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .edu-card {
+    border: 1px solid var(--border);
+    padding: 28px;
+    background: var(--surface);
+    transition: border-color 0.3s;
+  }
+
+  .edu-card:hover { border-color: var(--border-strong); }
+
+  .edu-year {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+
+  .edu-degree {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .edu-school {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  /* === CONTACT / FOOTER === */
+  .contact-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 80px 60px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .contact-section .section-title {
+    max-width: 700px;
+    margin: 0 auto 16px;
+  }
+
+  .contact-sub {
+    color: var(--cream-dim);
+    font-size: 13px;
+    margin-bottom: 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    border: 1px solid var(--border);
+    padding: 16px 28px;
+    color: var(--cream);
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+  }
+
+  .contact-item:hover { border-color: var(--gold); color: var(--gold); }
+
+  .contact-icon { font-size: 16px; }
+
+  /* === MARQUEE STRIP === */
+  .marquee-strip {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    background: var(--surface);
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee-sep {
+    display: inline-block;
+    margin: 0 32px;
+    color: var(--gold);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section, nav, .contact-section { padding-left: 24px; padding-right: 24px; }
+    nav { gap: 20px; }
+    .hero-left { padding: 60px 24px; }
+  }
+
+  /* === LOAD ANIMATIONS === */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RL.</div>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-left">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      Available for hire
+    </div>
+    <h1 class="hero-name">
+      Ruben<span>Lubasa</span>
+    </h1>
+    <p class="hero-title">Full-Stack Developer · Digital Transformation Consultant</p>
+    <p class="hero-tagline">
+      Engineering degree meets international finance meets product development. I build systems that work — web platforms, digital transformation strategies, and data-driven solutions — for clients who need results, not theory.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:lubasaruben44@gmail.com" class="btn-primary">Hire Me</a>
+      <a href="#experience" class="btn-ghost">View Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-label">Education</div>
+      <div class="stat-value">B.Eng.</div>
+      <div class="stat-sub">Computer Engineering — Université de Mbujimayi</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Languages spoken</div>
+      <div class="stat-value">5</div>
+      <div class="stat-sub">French · English · Lingala · Swahili · Tshiluba</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sectors covered</div>
+      <div class="stat-value">4+</div>
+      <div class="stat-sub">FinTech · GovTech · Telecom · Tourism</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Location</div>
+      <div class="stat-value">DRC</div>
+      <div class="stat-sub">Lubumbashi — Remote-ready worldwide</div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    React.js <span class="marquee-sep">◆</span> Node.js <span class="marquee-sep">◆</span> REST APIs <span class="marquee-sep">◆</span> Digital Transformation <span class="marquee-sep">◆</span> Trade Finance <span class="marquee-sep">◆</span> Project Management <span class="marquee-sep">◆</span> GovTech <span class="marquee-sep">◆</span> Full-Stack Development <span class="marquee-sep">◆</span> HTML5 · CSS3 <span class="marquee-sep">◆</span> JavaScript <span class="marquee-sep">◆</span> Community Management <span class="marquee-sep">◆</span> KPI Reporting <span class="marquee-sep">◆</span>
+    React.js <span class="marquee-sep">◆</span> Node.js <span class="marquee-sep">◆</span> REST APIs <span class="marquee-sep">◆</span> Digital Transformation <span class="marquee-sep">◆</span> Trade Finance <span class="marquee-sep">◆</span> Project Management <span class="marquee-sep">◆</span> GovTech <span class="marquee-sep">◆</span> Full-Stack Development <span class="marquee-sep">◆</span> HTML5 · CSS3 <span class="marquee-sep">◆</span> JavaScript <span class="marquee-sep">◆</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What I offer</div>
+  <h2 class="section-title">Services built<br>for <em>real impact</em></h2>
+  <div class="services-grid fade-in">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Full-Stack Web Development</div>
+      <div class="service-desc">End-to-end web applications using React.js, Node.js, REST APIs, HTML5/CSS3, and JavaScript. From MVP to production-ready platform, I deliver clean, responsive, and scalable code.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Digital Transformation Consulting</div>
+      <div class="service-desc">Helping organizations — including government institutions and enterprises — modernize their operations through technology strategy, process digitization, and implementation roadmaps.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Project Management & Coordination</div>
+      <div class="service-desc">Planning, team coordination, milestone tracking, KPI dashboards, and stakeholder reporting. I manage the full project lifecycle so clients get delivery on time and on budget.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Trade Finance & Business Strategy</div>
+      <div class="service-desc">With experience at Euro Exim Bank, I bring a deep understanding of international trade finance instruments (LC, SBLC, BG), market development in Sub-Saharan Africa, and corporate financial analysis.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Community Management & Marketing</div>
+      <div class="service-desc">Content strategy, customer prospecting, social media management, and digital communications tailored for African and international markets. Multilingual reach in 5 languages.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Data Analysis & Reporting (Excel)</div>
+      <div class="service-desc">Advanced Excel modeling, pivot analysis, KPI tracking, and business dashboards. Certified through INPP, I turn raw data into actionable insights for management and decision-makers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Track record</div>
+  <h2 class="section-title">Experience that<br><em>crosses borders</em></h2>
+  <div class="timeline fade-in">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Jun 2024 – Aug 2024</div>
+      <div class="timeline-role">Trade Finance Executive</div>
+      <div class="timeline-company">Euro Exim Bank — International Trade Finance</div>
+      <div class="timeline-body">
+        <ul>
+          <li>Prospected and acquired corporate clients for international trade finance instruments (LC, SBLC, BG)</li>
+          <li>Analyzed client financial needs and structured bespoke trade finance proposals</li>
+          <li>Managed full client relationships and monitored financing dossiers through the commercial cycle</li>
+          <li>Contributed to portfolio growth and expanded the bank's commercial footprint across Sub-Saharan Africa</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item" style="animation-delay:0.15s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Jul 2021 – Sep 2021</div>
+      <div class="timeline-role">Operations Manager</div>
+      <div class="timeline-company">Travel Agency — Tourism Sector</div>
+      <div class="timeline-body">
+        <ul>
+          <li>Oversaw daily agency operations: booking management, logistics coordination, and customer satisfaction</li>
+          <li>Led and mentored a cross-functional team; defined and communicated the strategic vision</li>
+          <li>Optimized internal processes to reduce turnaround times and improve operational efficiency</li>
+          <li>Built a customer-centric culture to retain existing clients and attract new business</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item" style="animation-delay:0.3s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Nov 2018 – Jan 2019</div>
+      <div class="timeline-role">Voting Center Technician</div>
+      <div class="timeline-company">CENI RDC — National Independent Electoral Commission</div>
+      <div class="timeline-body">
+        <ul>
+          <li>Ensured operational integrity of electronic voting machines during the 2018 DRC national elections</li>
+          <li>Diagnosed and resolved technical incidents in real time to ensure electoral continuity</li>
+          <li>Coordinated with local teams and supervisors to maintain full compliance with procedures</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item" style="animation-delay:0.45s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Jul 2016 – Sep 2016</div>
+      <div class="timeline-role">Field Agent & Registration Officer</div>
+      <div class="timeline-company">Orange RDC — Telecommunications</div>
+      <div class="timeline-body">
+        <ul>
+          <li>Registered subscribers and sold Orange SIM cards during a major network expansion campaign</li>
+          <li>Educated customers on digital products and commercial offers</li>
+          <li>Consistently met daily registration targets in a demanding field environment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical arsenal</div>
+  <h2 class="section-title">Skills that<br><em>ship products</em></h2>
+  <div class="skills-grid fade-in">
+    <div class="skill-cell" data-num="01">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-name">Web Development</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">Building responsive, fast, and modern web applications from front to back.</p>
+      <div class="skill-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-cell" data-num="02">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Project Management</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">Driving projects from kick-off to delivery with clear milestones and reporting.</p>
+      <div class="skill-tags">
+        <span class="tag">Planning</span>
+        <span class="tag">Team Coordination</span>
+        <span class="tag">KPI Tracking</span>
+        <span class="tag">Reporting</span>
+      </div>
+    </div>
+    <div class="skill-cell" data-num="03">
+      <div class="skill-icon">🏦</div>
+      <div class="skill-name">Finance & Trade</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">International trade finance instruments and corporate financial analysis.</p>
+      <div class="skill-tags">
+        <span class="tag">Trade Finance</span>
+        <span class="tag">LC / SBLC / BG</span>
+        <span class="tag">Budgeting</span>
+        <span class="tag">Financial Analysis</span>
+      </div>
+    </div>
+    <div class="skill-cell" data-num="04">
+      <div class="skill-icon">📣</div>
+      <div class="skill-name">Marketing & Growth</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">From client prospecting to community management and digital strategy.</p>
+      <div class="skill-tags">
+        <span class="tag">Prospecting</span>
+        <span class="tag">Community Mgmt</span>
+        <span class="tag">Digital Strategy</span>
+      </div>
+    </div>
+    <div class="skill-cell" data-num="05">
+      <div class="skill-icon">🛠️</div>
+      <div class="skill-name">Tools & Platforms</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">Industry-standard productivity and collaboration tools for professional delivery.</p>
+      <div class="skill-tags">
+        <span class="tag">Excel Advanced</span>
+        <span class="tag">Word</span>
+        <span class="tag">PowerPoint</span>
+        <span class="tag">Google Workspace</span>
+      </div>
+    </div>
+    <div class="skill-cell" data-num="06">
+      <div class="skill-icon">🌍</div>
+      <div class="skill-name">Multilingual</div>
+      <p style="color:var(--cream-dim);font-size:12px;margin-bottom:10px">Native-level communication across Central & West African contexts and beyond.</p>
+      <div class="skill-tags">
+        <span class="tag">French (native)</span>
+        <span class="tag">English (pro)</span>
+        <span class="tag">Lingala</span>
+        <span class="tag">Swahili</span>
+        <span class="tag">Tshiluba</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <div class="section-label">Academic background</div>
+  <h2 class="section-title">Built on solid<br><em>foundations</em></h2>
+  <div class="edu-grid fade-in">
+    <div class="edu-card">
+      <div class="edu-year">2023 – 2024</div>
+      <div class="edu-degree">Full-Stack Web & Mobile Development</div>
+      <div class="edu-school">Kadea Academy, Lubumbashi</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2020</div>
+      <div class="edu-degree">Bachelor's in Computer Engineering (Licence)</div>
+      <div class="edu-school">Université de Mbujimayi, DRC</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2018</div>
+      <div class="edu-degree">Bachelor's Yr. 1–3 — Computer Engineering (Graduat)</div>
+      <div class="edu-school">Université de Mbujimayi, DRC</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2022</div>
+      <div class="edu-degree">Advanced Excel Certification</div>
+      <div class="edu-school">INPP — Institut National de Préparation Professionnelle</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2015</div>
+      <div class="edu-degree">State Diploma — Science Track (Très bien)</div>
+      <div class="edu-school">École Secondaire Général Technique de la Kanshi</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section>
+  <div class="section-label">Communication</div>
+  <h2 class="section-title">Speaking your<br><em>language</em></h2>
+  <div class="lang-grid fade-in">
+    <div class="lang-pill">
+      <span style="font-size:22px">🇫🇷</span>
+      <div>
+        <div class="lang-name">French</div>
+        <div class="lang-level">Native</div>
+      </div>
+    </div>
+    <div class="lang-pill">
+      <span style="font-size:22px">🇬🇧</span>
+      <div>
+        <div class="lang-name">English</div>
+        <div class="lang-level">Professional proficiency</div>
+      </div>
+    </div>
+    <div class="lang-pill">
+      <span style="font-size:22px">🌍</span>
+      <div>
+        <div class="lang-name">Lingala</div>
+        <div class="lang-level">Native</div>
+      </div>
+    </div>
+    <div class="lang-pill">
+      <span style="font-size:22px">🌍</span>
+      <div>
+        <div class="lang-name">Swahili</div>
+        <div class="lang-level">Native</div>
+      </div>
+    </div>
+    <div class="lang-pill">
+      <span style="font-size:22px">🌍</span>
+      <div>
+        <div class="lang-name">Tshiluba</div>
+        <div class="lang-level">Native</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-label" style="justify-content:center;max-width:fit-content;margin:0 auto 12px">Let's talk</div>
+  <h2 class="section-title">Ready to build<br><em>something real?</em></h2>
+  <p class="contact-sub">Available for freelance projects, long-term contracts, and consulting engagements — remote or on-site in the DRC.</p>
+  <div class="contact-links">
+    <a href="mailto:lubasaruben44@gmail.com" class="contact-item">
+      <span class="contact-icon">✉️</span> lubasaruben44@gmail.com
+    </a>
+    <a href="tel:+243841060602" class="contact-item">
+      <span class="contact-icon">📞</span> +243 841 060 602
+    </a>
+    <div class="contact-item">
+      <span class="contact-icon">📍</span> Lubumbashi, DRC
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
